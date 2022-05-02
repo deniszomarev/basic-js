@@ -10,7 +10,9 @@ const chainMaker = {
     return this.chain.length;
   },
   addLink(value) {
-    value ? this.chain.push(value) : this.chain.push("");
+    typeof value !== "undefined"
+      ? this.chain.push(`${value}`)
+      : this.chain.push("");
     return this;
   },
   removeLink(position) {
@@ -28,11 +30,13 @@ const chainMaker = {
     return this;
   },
   reverseChain() {
-    this.chain = this.chain.reverse();
+    this.chain.reverse();
     return this;
   },
   finishChain() {
-    throw new NotImplementedError("Not implemented");
+    const result = this.chain.map((el) => "( " + el + " )").join("~~");
+    this.chain = [];
+    return result;
   },
 };
 
